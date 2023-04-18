@@ -48,68 +48,51 @@ const pizzas = [
   },
 ];
 
-// Utilizando métodos de array e iterando sobre el array de pizzas, realizar las siguientes actividades, imprimiendo en consola:
-
-// a)  Las pizzas que tengan un id impar.
-// b) Responder: ¿Hay alguna pizza que valga menos de $600?
-// c) El nombre de cada pizza con su respectivo precio.
-// d) Todos los ingredientes de cada pizza (En cada iteración imprimir los ingredientes de la pizza que se esta recorriendo). Ayuda: van a tener que realizar dos recorridos, ya que cada pizza del array de pizzas tiene una propiedad "ingredientes" cuyo valor es un array con ingredientes.
-
-// TODAS  las respuestas deben ser USER-FRIENDLY.
-
 // ------ Ejercicio A ------
 
 console.log("------ Ejercicio A ------");
 
-for (const elemento of pizzas) {
-  if (elemento.id % 2 !== 0) {
-    console.log(`* La ${elemento.nombre} Tiene id IMPAR`);
-  }
-}
+console.log("* LAS PIZZAS CON ID IMPAR SON: ");
+const PizzasIdImpar = pizzas.filter((producto) => {
+  return producto.id % 2 !== 0;
+});
+
+PizzasIdImpar.forEach((producto) => {
+  console.log(`-> La ${producto.nombre} Tiene id IMPAR`);
+});
+
 console.log("\n");
 
 // ------ Ejercicio B ------
 
 console.log("------ Ejercicio B ------");
+console.log("¿HAY ALUGUNA PIZZA QUE VALGA MENOS DE $600");
+const PrecioMenorA600 = pizzas.some((producto) => {
+  return producto.precio < 600;
+})
+  ? console.log("Si, hay Productos que valen menos de $600")
+  : console.log("No hay Productos que valen menos de $600");
 
-console.log(`¿Hay alguna pizza que valga menos de $600?`);
-
-let MenosDe600 = 0;
-let PizzaMenosDe600 = [];
-
-for (const elemento of pizzas) {
-  if (elemento.precio < 600) {
-    MenosDe600++;
-    PizzaMenosDe600.unshift(elemento.nombre);
-  }
-}
-if (MenosDe600 > 0) {
-  console.log(
-    `Si, En este momento hay ${MenosDe600} pizzas con valor inferior a $600`,
-    `\n(Estas son: ${PizzaMenosDe600.toLocaleString()})`
-  );
-} else {
-  console.log(`No, en este momento no hay pizzas que valen menos de $600`);
-}
 console.log("\n");
 
 // ------ Ejercicio C ------
 
 console.log("------ Ejercicio C ------");
-console.log("Estos son nuestros Productos y sus Precios:");
-for (const elemento of pizzas) {
-  console.log(`* ${elemento.nombre} - $ ${elemento.precio}`);
-}
+console.log("ESTOS SON NUESTROS PRODUCTOS Y SUS PRECIOS: ");
+const NombrePizaYPrecio = pizzas.forEach((producto) => {
+  console.log(`-> ${producto.nombre}, con valor de $${producto.precio}`);
+});
 console.log("\n");
 
 // ------ Ejercicio C ------
 
 console.log("------ Ejercicio C ------");
-console.log("Te contamos sobre nuestras Pizzas y sus Ingredientes:");
-for (const elemento of pizzas) {
-  console.log(`* ${elemento.nombre.toLocaleUpperCase()}: `);
-  for (ingredientes of elemento.ingredientes) {
-    console.log(`-> ${ingredientes}`);
-  }
-}
+console.log("ESTOS SON LOS INGREDIENTES QUE TIENEN NUESTRAS ESPECIALIDADES:");
+const RecorrerPizzas = pizzas.forEach((producto) => {
+  console.log(`*** ${producto.nombre.toLocaleUpperCase()} ***`);
+  const RecorrerIngredientes = producto.ingredientes.forEach((ingrediente) => {
+    console.log(`-> ${ingrediente}`);
+  });
+});
+
 console.log("\n");
